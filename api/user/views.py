@@ -11,8 +11,19 @@ import re
 # Create your views here.
 
 def generate_session_token(length= 10):    
-    return ''.join(random.SystemRandom(length).choice([chr(i) for i in range(97,123)] + [str(i) for i in range(10)]) for _ in range(10))
+    return ''.join(random.SystemRandom().choice([chr(i) for i in range(97,123)] + [str(i) for i in range(10)]) for _ in range(length))
 
 def signin(request):
     if not request.method == 'POST':
         return JsonResponse({'error': 'your Request doesnot exist'})
+
+
+    username = request.POST('email')
+    password = request.POST('password')
+
+    if not  re.match("^[\w\.\+\-]+\@[\w+\.[a-z]{2,3$}",username):
+        return JsonResponse({'error': 'Enter a valid email'})
+        
+
+    if len(password) < 3:
+        return JsonResponse({'error': 'password Must be at least 3 chaarecter'})    
