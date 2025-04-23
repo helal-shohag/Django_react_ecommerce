@@ -12,7 +12,7 @@ class userModel(AbstractUser):
     REQUIRED_FIELDS = []
 
     phone = models.CharField(max_length=20,blank=True,null=True)
-    gender = models.models.CharField(max_length=50,blank=True,null=True)
+    gender = models.CharField(max_length=50,blank=True,null=True)
     
 
     session_token = models.CharField(max_length=10,default=0)

@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     'api.category',
     'api.product',
+    'api.user',
+    'api.order',
+   
     
     
 ]
@@ -125,6 +128,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
+AUTH_USER_MODEL = 'user.userModel'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -145,3 +151,4 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+

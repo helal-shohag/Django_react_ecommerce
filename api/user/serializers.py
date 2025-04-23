@@ -3,21 +3,22 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import authentication_classes ,permission_classes
 from .models import userModel
 
-class userSerializers(serializers.HyperlinkedModelSerializer):
+class userSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self,validated_data,):
         password = validated_data.pop('password',None)
-        instance =self.meta.model(** validated_data)
-        instance.save()
-        return instance
+        instance =self.Meta.model(** validated_data)
+        
     
         if password is not None:
           instance.set_password(password)
+          instance.save()
+          return instance
 
-    def update(self,instance,validated_data):
-        for attr,value in validated_data.items():
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
             if attr == 'password':
-                instance.set_password()
+               instance.set_password(value)
 
             else:
                 setattr(instance,attr,value)
@@ -25,8 +26,8 @@ class userSerializers(serializers.HyperlinkedModelSerializer):
         instance.save()
         return instance
         
-    class meta:
+    class Meta:
         model = userModel
         extra_kwargs = {'password' : {'write_only':True}}
-        fields = ('name','email','phone','gender','session_token','is_active','is_staff','is_superuser')
+        fields = ('name','email','password','phone','gender','session_token','is_active','is_staff','is_superuser')
         
