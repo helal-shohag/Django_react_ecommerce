@@ -1,0 +1,1 @@
+export const API = ProcessingInstruction.env.REACT_APP_BACKEND
